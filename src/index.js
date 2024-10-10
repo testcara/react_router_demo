@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import routes from "./routes";
+import Student from "./StudentPage/student";
+import BookStore from "./BookPage/bookStore";
+import Book from "./BookPage/book";
 
 function App() {
   return (
@@ -14,28 +16,20 @@ function App() {
               <Link to="/home">Home page</Link>
             </li>
             <li>
-              <Link to="/users">Users page</Link>
+              <Link to="/bookstore">BookStore page</Link>
             </li>
             <li>
-              <Link to="/about">About page</Link>
+              <Link to="/student">Student page</Link>
             </li>
           </ul>
         </nav>
       </div>
       <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.element}>
-            {route.children
-              ? route.children.map((child, childIndex) => (
-                  <Route
-                    key={childIndex}
-                    path={child.path}
-                    element={child.element}
-                  />
-                ))
-              : null}
-          </Route>
-        ))}
+        <Route path="/home" element={<App />} />
+        <Route path="/bookstore" element={<BookStore />}>
+          <Route path="book" element={<Book />} />
+        </Route>
+        <Route path="/student" element={<Student />} />
       </Routes>
     </Router>
   );
